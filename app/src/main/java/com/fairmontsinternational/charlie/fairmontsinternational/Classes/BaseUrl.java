@@ -29,9 +29,9 @@ public class BaseUrl {
         String url = ss+"api/addpassword?phone_no="+phone+"&password="+password;
         return url;
     }
-    public static String addcomment(String admission,String date,String comment)
+    public static String addcomment(String diaryid,String date,String comment)
     {
-        String url = ss+"api/addcomment?admission_no="+admission+"&date="+date+"&comment="+comment;
+        String url = ss+"api/addcomment?diary_id="+diaryid+"&date="+date+"&comment="+comment;
         return url;
     }
     public static String updatePassword(String phone,String newpass,String oldpass)
@@ -71,6 +71,14 @@ public class BaseUrl {
 
     public static String fetchfees(String admission_no){
         String url = ss+"api/fetchfees/?id="+admission_no;
+        return url;
+    }
+    public static String fetchfeeinvoice(String admission_no){
+        String url = ss+"api/FetchCurrentTermInvoice/?id="+admission_no;
+        return url;
+    }
+    public static String fetchfeesinvoicetotals(String admission_no){
+        String url = ss+"api/fetchTotalCurrentTermFeeInvoice/?id="+admission_no;
         return url;
     }
 

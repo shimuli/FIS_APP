@@ -32,14 +32,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
+
 import io.paperdb.Paper;
 
 public class ParentComment extends AppCompatActivity {
 
     Button save;
-    TextView text_date,notes,teachers_coments;
+    TextView text_date,notes,teachers_coments,diary_id;
     EditText comments;
     String admission_no;
+    String diaryId;
     private static String FETCH_URL;
 
     @Override
@@ -53,10 +56,11 @@ public class ParentComment extends AppCompatActivity {
         notes=findViewById(R.id.Comment_notes_text);
         teachers_coments=findViewById(R.id.Comment_teacher_text);
         comments=findViewById(R.id.Comment_text);
-
+        diary_id=findViewById(R.id.diaryid);
 
         Intent intent=getIntent();
         final String date=intent.getStringExtra("date");
+        diaryId=intent.getStringExtra("diaryId");
         String Diary_notes=intent.getStringExtra("notes");
         String Tcomment=intent.getStringExtra("teacher_comment");
         String Pcomment=intent.getStringExtra("parent_comment");
@@ -80,8 +84,10 @@ public class ParentComment extends AppCompatActivity {
                 }else{
 //                    FETCH_URL="http://fairmontsinternationalschool.co.ke/fairmontsAPI/addcomment.php?admission_no="+admission_no
 //                            +"&date="+dated+"&comment="+Comment;
-                    FETCH_URL= BaseUrl.addcomment(admission_no,dated,Comment);
-                    Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
+                   // FETCH_URL= BaseUrl.addcomment(admission_no,dated,Comment);
+                    FETCH_URL= BaseUrl.addcomment(diaryId,dated,Comment);
+                    FETCH_URL= FETCH_URL.replaceAll(" " ,"%20");
+                  //  Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
                     execute();
                     }
             }
@@ -98,7 +104,7 @@ public class ParentComment extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        progressDialog.dismiss();
+                      //  progressDialog.dismiss();
 
                         try {
                             JSONArray jsonArray=response.getJSONArray("Comment");
@@ -154,6 +160,58 @@ public class ParentComment extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
+
+    private void postcomment() {
+        final JsonObjectRequest jsonObjectRequest2= new JsonObjectRequest(Request.Method.GET, FETCH_URL,
+                null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray=response.getJSONArray("Comment");
+                    String Status=jsonArray.get(0).toString();
+                    switch (Status){
+                        case"Updated":
+                            Toast.makeText(getApplicationContext(),"Comment Saved!",Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(ParentComment.this,Reports.class));
+                            finish();
+                            break;
+                        case"Failed":
+                            Toast.makeText(getApplicationContext(),"Comment not saved!.",Toast.LENGTH_LONG).show();
+                            break;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String message = null;
+                if (error instanceof NetworkError) {
+                    message = "Cannot connect to Internet...Please check your connection!";
+                } else if (error instanceof ServerError) {
+                    message = "The server could not be found. Please try again after some time!!";
+                } else if (error instanceof AuthFailureError) {
+                    message = "Cannot connect to Internet...Please check your connection!";
+                } else if (error instanceof ParseError) {
+                    message = "Invalid Credentials! Please try again!!";
+                } else if (error instanceof NoConnectionError) {
+                    message = "Cannot connect to Internet...Please check your connection!";
+                } else if (error instanceof TimeoutError) {
+                    message = "Connection TimeOut! Please check your internet connection.";
+                }else{
+                    Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+                }
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+            }
+        });
+        jsonObjectRequest2.setRetryPolicy(new DefaultRetryPolicy(
+                35000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        requestQueue.add(jsonObjectRequest2);
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();

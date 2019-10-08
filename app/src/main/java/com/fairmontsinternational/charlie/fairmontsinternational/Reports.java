@@ -178,7 +178,7 @@ public class Reports extends AppCompatActivity {
 
                             for(int i=0 ; i<jsonArray.length();i++){
                                 JSONObject object=jsonArray.getJSONObject(i);
-                                reportsClassList.add(new ReportsClass(object.getString("Date")
+                                reportsClassList.add(new ReportsClass(object.getString("DiaryId"),object.getString("Date")
                                         ,object.getString("DayEntry"),object.getString("TeacherComment"),object.getString("ParenyComment")));
                             }
 
@@ -262,7 +262,7 @@ public class Reports extends AppCompatActivity {
 
                             for(int i=0 ; i<jsonArray2.length();i++){
                                 JSONObject object=jsonArray2.getJSONObject(i);
-                                reportsClassList2.add(new ReportsClass(object.getString("Date")
+                                reportsClassList2.add(new ReportsClass(object.getString("DiaryId"),object.getString("Date")
                                         ,object.getString("DayEntry"),object.getString("TeacherComment"),object.getString("ParenyComment")));
                             }
 

@@ -90,6 +90,10 @@ public class splashscreen extends AppCompatActivity {
                         try {
                             JSONArray jsonArray=response.getJSONArray("User");
                             Paper.book().write("Main_url",jsonArray.get(0).toString());
+
+                           //test platform
+                            //String mainurl="http://192.168.1.11:75/";
+                            //Paper.book().write("Main_url",mainurl);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

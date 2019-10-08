@@ -61,6 +61,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Profile_student_Name" />
 
+        <TextView
+            android:id="@+id/Profile_SUID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/nunito_extralight"
+            android:text="SUID"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Profile_student_admission_no" />
+
     </android.support.constraint.ConstraintLayout>
 
         <ScrollView
@@ -401,6 +420,303 @@
                     android:fontFamily="@font/nunito_extralight"
                     android:textSize="18sp"
                     android:layout_marginBottom="15dp"/>
+
+                <!-- Health Details-->
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/backgroundcolor"
+                    android:text="Health Details"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:padding="10dp"
+                    android:textSize="20sp"/>
+
+                <!-- Health Details-->
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Provider Name"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:id="@+id/Profile_provider_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="provider_name"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact Number"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:id="@+id/Profile_provider_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="provider phone"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact Person"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:id="@+id/Profile_contact_person_provider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/number"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="5dp"/>
+
+                <!--Home Details-->
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/backgroundcolor"
+                    android:text="Home Details"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:padding="10dp"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Home Location"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:id="@+id/Profile_home_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Home Location"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Home Description"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:id="@+id/Profile_home_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="home desc"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Home Address"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:id="@+id/Profile_home_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="home address"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="5dp"/>
+
+
+                <!-- School Items -->
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/backgroundcolor"
+                    android:text="School Items"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:padding="10dp"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:id="@+id/Profile_item_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="item date"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Item Name"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:id="@+id/Profile_item_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="item name"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quantity"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:id="@+id/Profile_item_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="item quantity"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="5dp"/>
+
+                <!-- Documents-->
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/backgroundcolor"
+                    android:text="Documents"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:padding="10dp"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Document Name"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:id="@+id/Profile_doc_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="doc name"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Document Description"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:paddingStart="10dp"
+                    android:id="@+id/Profile_doc_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="doc desc"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="5dp"/>
 
             </LinearLayout>
 

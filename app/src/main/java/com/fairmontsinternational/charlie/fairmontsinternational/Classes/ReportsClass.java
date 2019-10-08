@@ -6,9 +6,10 @@ import java.util.Locale;
 
 public class ReportsClass {
 
-    private String report_date,report,teacher_commment,parent_comment;
+    private String diaryid,report_date,report,teacher_commment,parent_comment;
 
-    public ReportsClass(String report_date, String report, String teacher_commment, String parent_comment) {
+    public ReportsClass(String diaryid, String report_date, String report, String teacher_commment, String parent_comment) {
+        this.diaryid = diaryid;
         this.report_date = report_date;
         this.report = report;
         this.teacher_commment = teacher_commment;
@@ -27,6 +28,9 @@ public class ReportsClass {
         return report_date;
     }
 
+    public String getDiaryID() {
+        return diaryid;
+    }
     public String getReport() {
         return report;
     }

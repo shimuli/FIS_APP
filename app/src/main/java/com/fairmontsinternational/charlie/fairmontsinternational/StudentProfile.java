@@ -34,6 +34,12 @@ public class StudentProfile extends AppCompatActivity {
     String student_names, student_level,student_system,student_gender,student_dob,student_parent_name,student_other_parent_name,student_parent_id_no,
             student_other_parent_id_no,student_parent_phone,student_other_parent_phone,student_guardian_name,student_guardian_id_no,
             student_guardian_contact,student_home_address;
+
+    TextView ProviderName, ProviderPhone, ContactPerson, HomeLocation, HomeAddress, HomeDesc, ItemDate, ItemName, ItemQuantity,
+            DocName, DocDesc,  student_UID;
+
+    String providerName, providerPhone, contactPerson, homeLocation, homeAddress, homeDesc, itemDate, itemName, itemQuantity,
+            docName, docDesc;
     public static String FETCH_URL;
 
     @Override
@@ -57,11 +63,29 @@ public class StudentProfile extends AppCompatActivity {
         level=findViewById(R.id.Profile_student_level);
         gender=findViewById(R.id.Profile_student_gender);
         studentNumber=findViewById(R.id.Profile_student_admission_no);
+        student_UID = findViewById(R.id.Profile_SUID);
+        ProviderName= findViewById(R.id.Profile_provider_name);
+        ProviderPhone= findViewById(R.id.Profile_provider_phone);
+        ContactPerson = findViewById(R.id.Profile_contact_person_provider);
+        HomeLocation = findViewById(R.id.Profile_home_location);
+        HomeAddress = findViewById(R.id.Profile_home_address);
+        HomeDesc = findViewById(R.id.Profile_home_desc);
+        ItemDate = findViewById(R.id.Profile_item_date);
+        ItemName = findViewById(R.id.Profile_item_name);
+        ItemQuantity = findViewById(R.id.Profile_item_quantity);
+        DocName = findViewById(R.id.Profile_doc_name);
+        DocDesc = findViewById(R.id.Profile_doc_desc);
 
         Paper.init(this);
         String admission_no=Paper.book().read("admission_no").toString();
 //        FETCH_URL="http://fairmontsinternationalschool.co.ke/fairmontsAPI/fetchsingleprofile.php?admission_no="+admission_no;
         FETCH_URL= BaseUrl.fetchsingleprofile(admission_no);
+
+        //  Waiting for APIend point to complete the fetching of student SUID
+
+        //     Paper.init(this);
+        //     String Student_id = Paper.book().read("Student_id").toString();
+        //     FETCH_URL = BaseUrl.fetchsingleprofileID(Student_id);
 
         final ProgressDialog progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Fetching student profiles.");
@@ -92,6 +116,19 @@ public class StudentProfile extends AppCompatActivity {
                     student_guardian_id_no=jsonArray.get(13).toString();
                     student_home_address=jsonArray.get(14).toString();
 
+                    //  No End Points
+                    /* providerName = jsonArray.get(15).toString();
+                    providerPhone = jsonArray.get(16).toString();
+                    contactPerson = jsonArray.get(17).toString();
+                    homeLocation = jsonArray.get(18).toString();
+                    homeAddress = jsonArray.get(19).toString();
+                    homeDesc = jsonArray.get(20).toString();
+                    itemDate = jsonArray.get(21).toString();
+                    itemName = jsonArray.get(22).toString();
+                    itemQuantity = jsonArray.get(23).toString();
+                    docName =jsonArray.get(24).toString();
+                    docDesc = jsonArray.get(25).toString(); */
+
                     parent_name.setText(student_parent_name);
                     other_parent_name.setText(student_other_parent_name);
                     parent_id_no.setText(student_parent_id_no);
@@ -107,6 +144,17 @@ public class StudentProfile extends AppCompatActivity {
                     level.setText(student_level);
                     gender.setText(student_gender);
                     dob.setText(student_dob);
+                    ProviderName.setText(providerName);
+                    ProviderPhone.setText(providerPhone);
+                    ContactPerson.setText(contactPerson);
+                    HomeLocation.setText(homeLocation);
+                    HomeAddress.setText(homeAddress);
+                    HomeDesc.setText(homeDesc);
+                    ItemDate.setText(itemDate);
+                    ItemName.setText(itemName);
+                    ItemQuantity.setText(itemQuantity);
+                    DocName.setText(docName);
+                    DocDesc.setText(docDesc);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

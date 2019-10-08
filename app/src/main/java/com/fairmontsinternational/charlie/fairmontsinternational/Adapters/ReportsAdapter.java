@@ -44,12 +44,14 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportsV
             @Override
             public void onClick(View v) {
 
+                String diaryId=reportsClass.getDiaryID();
                 String date=reportsClass.getReport_date();
                 String notes=reportsClass.getReport();
                 String teacher_comments=reportsClass.getTeacher_commment();
                 String parent_comment=reportsClass.getParent_comment();
 
                 Intent intent= new Intent(mCtx, ParentComment.class);
+                intent.putExtra("diaryId",diaryId);
                 intent.putExtra("date",date);
                 intent.putExtra("notes",notes);
                 intent.putExtra("teacher_comment",teacher_comments);

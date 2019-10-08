@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/nunito_extralight"
-            android:text="Total Paid"
+            android:text="Total Invoiced"
             android:textColor="@android:color/black"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
