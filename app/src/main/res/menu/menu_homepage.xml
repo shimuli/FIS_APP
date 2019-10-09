@@ -3,17 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.fairmontsinternational.charlie.fairmontsinternational.Homepage">
 
-   <!-- <item
-        android:id="@+id/action_alert"
-        android:orderInCategory="100"
-        android:title="Alerts"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_message"/>-->
 
     <item
         android:id="@+id/action_switch"
+        android:checkable="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_notifications_black_24dp"
         android:orderInCategory="100"
-        android:title="Switch profile"
+        android:title="Notification"
+        android:visible="true"
         app:showAsAction="never" />
 
 </menu>

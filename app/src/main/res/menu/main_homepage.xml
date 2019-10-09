@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_settings"
+        android:enabled="false"
+        android:title="Setting"
+        android:icon="@drawable/ic_notifications_black_24dp"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:visible="false"
         app:showAsAction="never" />
 </menu>

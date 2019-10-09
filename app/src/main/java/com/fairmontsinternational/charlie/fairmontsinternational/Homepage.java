@@ -1,5 +1,6 @@
 package com.fairmontsinternational.charlie.fairmontsinternational;
 
+import android.app.Notification;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
@@ -9,10 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import io.paperdb.Paper;
@@ -22,6 +25,7 @@ public class Homepage extends AppCompatActivity {
     String admission_no;
 
     boolean doubleBackToExitPressedOnce = false;
+    AppCompatImageView Notification;
     ConstraintLayout Profiler,Fee,Coursework,Timetables,info,Diary,logout,attendance;
 
 //    private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -61,6 +65,14 @@ public class Homepage extends AppCompatActivity {
         logout= findViewById(R.id.Btn_Home_tab_Logout);
         info=findViewById(R.id.Btn_Info);
         attendance=findViewById(R.id.Btn_Home_tab_Attendance);
+        Notification = findViewById(R.id.notification);
+
+        Notification.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                startActivity(new Intent(Homepage.this, android.app.Notification.class));
+            }
+        });
 
 
         attendance.setOnClickListener(new View.OnClickListener() {

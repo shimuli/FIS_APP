@@ -40,6 +40,12 @@ public class BaseUrl {
         return url;
     }
 
+    public static String forgotPassword(String phone,String newpass)
+    {
+        String url = ss+"api/forgotpassword?phone_no="+phone+"&new_password="+newpass;
+        return url;
+    }
+
     public static String attendance(String admNo,String date)
     {
         String url = ss+"api/fetchattendance?admission_no="+admNo+"&date="+date;

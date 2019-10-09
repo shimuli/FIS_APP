@@ -127,6 +127,17 @@
             app:fontFamily="@font/nunito_extralight"
             android:gravity="center_horizontal"/>
 
+        <TextView
+            android:id="@+id/forget_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Forgot Password"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:fontFamily="@font/nunito_extralight"
+            android:gravity="center_horizontal"/>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

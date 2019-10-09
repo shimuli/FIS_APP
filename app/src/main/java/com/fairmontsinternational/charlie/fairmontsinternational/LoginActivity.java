@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     public static String LOGIN_URL;
     MaterialEditText Phone, Password;
     Button Btnlogin;
-    TextView CreateAccount;
+    TextView CreateAccount, ForgetPassword;
     ProgressBar progressBar;
     ImageView show;
     int setType;
@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         CreateAccount=findViewById(R.id.login_create_account);
         show=findViewById(R.id.LoginShowPassword);
         progressBar=findViewById(R.id.loginprogress);
+        ForgetPassword =findViewById(R.id.forget_password);
 
         show.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +84,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this,CreatePassword.class));
                 finish();
+            }
+        });
+
+        ForgetPassword.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(LoginActivity.this, ForgetPassword.class));
             }
         });
 
@@ -124,12 +131,22 @@ public class LoginActivity extends AppCompatActivity {
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 try{
                     JSONArray jsonArray=response.getJSONArray("User");
+                    String msg=jsonArray.get(0).toString();
+
+                    if(msg.contains("Invalid")){
+                        Toast.makeText(LoginActivity.this, "Kindly Enter Valid Credentials", Toast.LENGTH_LONG).show();
+                        //  startActivity(new Intent(LoginActivity.this,LoginActivity.class));
+                    }
+                    else {
+
 //                    String parent_id=jsonArray.get(0).toString();
 //                    Paper.book().write("Parent_id",parent_id);
-                    Paper.book().write("Phone_number",Phone.getText().toString());
-                    Toast.makeText(getApplicationContext(),"Login Successful!",Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(LoginActivity.this,children_profiles.class));
-                    finish();
+                        Paper.book().write("Phone_number", Phone.getText().toString());
+                        Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(LoginActivity.this, children_profiles.class));
+                        finish();
+                    }
+
                 }catch(JSONException e){
                     Toast.makeText(getApplicationContext(),"Login Failed! Try again",Toast.LENGTH_LONG).show();
                     e.printStackTrace();
