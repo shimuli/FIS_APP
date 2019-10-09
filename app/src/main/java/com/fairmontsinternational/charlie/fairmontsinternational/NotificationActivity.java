@@ -3,7 +3,7 @@ package com.fairmontsinternational.charlie.fairmontsinternational;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Notifictions extends AppCompatActivity {
+public class NotificationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

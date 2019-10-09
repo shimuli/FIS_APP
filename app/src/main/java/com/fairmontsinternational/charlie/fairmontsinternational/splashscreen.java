@@ -89,11 +89,11 @@ public class splashscreen extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray jsonArray=response.getJSONArray("User");
-                            //Paper.book().write("Main_url",jsonArray.get(0).toString());
+                            Paper.book().write("Main_url",jsonArray.get(0).toString());
 
                            //test platform
-                            String mainUrl="http://192.168.1.11:75/";
-                            Paper.book().write("Main_url",mainUrl);
+                            //String mainUrl="http://192.168.1.11:75/";
+                            //Paper.book().write("Main_url",mainUrl);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

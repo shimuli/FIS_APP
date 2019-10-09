@@ -1,10 +1,12 @@
 package com.fairmontsinternational.charlie.fairmontsinternational;
 
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,11 +14,14 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.widget.Toolbar;
+
 
 import io.paperdb.Paper;
 
@@ -27,6 +32,8 @@ public class Homepage extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
     AppCompatImageView Notification;
     ConstraintLayout Profiler,Fee,Coursework,Timetables,info,Diary,logout,attendance;
+    Toolbar Toolbar1;
+
 
 //    private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -37,7 +44,8 @@ public class Homepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+         Toolbar1  = findViewById(R.id.toolbar);
+         ActionBar actionBar = getSupportActionBar();
 //        setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -65,14 +73,17 @@ public class Homepage extends AppCompatActivity {
         logout= findViewById(R.id.Btn_Home_tab_Logout);
         info=findViewById(R.id.Btn_Info);
         attendance=findViewById(R.id.Btn_Home_tab_Attendance);
-        Notification = findViewById(R.id.notification);
+        Notification = findViewById(R.id.action_notification);
 
         Notification.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view){
-                startActivity(new Intent(Homepage.this, android.app.Notification.class));
+            public void onClick(View v){
+                Toast.makeText(getApplicationContext(), "Notkhejgfqlwikhgikhgekrle", Toast.LENGTH_SHORT).show();
+                //  startActivity(new Intent(Homepage.this, NotifictionsActivity.class));
+
             }
         });
+
 
 
         attendance.setOnClickListener(new View.OnClickListener() {
@@ -160,15 +171,15 @@ public class Homepage extends AppCompatActivity {
 
 
     }
-
-
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_homepage, menu);
-        return true;
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_homepage, menu);
+        return super.onCreateOptionsMenu(menu);
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -177,16 +188,30 @@ public class Homepage extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
 
         switch(item.getItemId()){
+            case  R.id.action_notification:
+                Toast.makeText(getApplicationContext(), "Notkhejgfqlwikhgikhgekrle", Toast.LENGTH_SHORT).show();
+                NotificationAction();
+                return true;
+
             case R.id.action_switch:
                 String empty="";
                 Paper.book().write("admission_no",empty);
                 startActivity(new Intent(Homepage.this,children_profiles.class));
-                finish();
-                break;
+              return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+
         }
 
-        return super.onOptionsItemSelected(item);
+
     }
+    private void NotificationAction() {
+        Intent intent = new Intent(Homepage.this, NotificationActivity.class);
+        startActivity(intent);
+    }
+
 //    public static class PlaceholderFragment extends Fragment {
 //        /**
 //         * The fragment argument representing the section number for this
