@@ -118,7 +118,7 @@ public class MainHomepage extends AppCompatActivity
         Fee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startActivity(new Intent(MainHomepage.this,fees.class));
+               startActivity(new Intent(MainHomepage.this,FeeInvoice.class));
                 //startActivity(new Intent(MainHomepage.this,FeeInvoice.class));
             }
         });

@@ -90,6 +90,11 @@ public class BaseUrl {
         return url;
     }
 
+    public static String fetchUID(String admission_no){
+        String url = ss+"api/FetchCurrentTermInvoice/?id="+admission_no;
+        return url;
+    }
+
     public static String searchreports(String admission_no,String start_date,String end_date){
         String url = ss + "api/searchreports?admission_no=" +admission_no+"&start_date="+start_date+"&end_date="+end_date;
         return  url;
