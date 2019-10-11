@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.fairmontsinternational.charlie.fairmontsinternational.Homepage">
 
+    <item android:id="@+id/action_notification"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="Notification"
+        app:showAsAction="ifRoom"/>
+
 
     <item
         android:id="@+id/action_switch"
@@ -13,5 +18,6 @@
         android:title="Notification"
         android:visible="true"
         app:showAsAction="never" />
+
 
 </menu>

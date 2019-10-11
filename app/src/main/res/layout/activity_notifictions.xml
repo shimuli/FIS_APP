@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".NotificationActivity">
 
-    <ListView
-        android:id="@+id/notifications"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:divider="#000000"
-        android:dividerHeight="1dp"
-        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/note_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
 </LinearLayout>

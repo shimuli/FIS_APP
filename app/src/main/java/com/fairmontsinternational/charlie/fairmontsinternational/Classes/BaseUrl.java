@@ -2,6 +2,8 @@ package com.fairmontsinternational.charlie.fairmontsinternational.Classes;
 
 import com.android.volley.toolbox.StringRequest;
 
+import java.util.Date;
+
 import io.paperdb.Paper;
 
 public class BaseUrl {
@@ -95,6 +97,12 @@ public class BaseUrl {
 
     public static String fetchreports(String admission_no){
         String url = ss+"api/fetchreports/?id="+admission_no;
+        return url;
+    }
+
+
+    public static String notifications(String date){
+        String url = ss+ "api/Notifications/?date="+date;
         return url;
     }
 

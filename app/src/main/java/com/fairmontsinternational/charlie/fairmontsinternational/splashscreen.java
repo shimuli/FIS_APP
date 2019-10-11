@@ -93,7 +93,7 @@ public class splashscreen extends AppCompatActivity {
 
                            //test platform
                             //String mainUrl="http://192.168.1.11:75/";
-                            //Paper.book().write("Main_url",mainUrl);
+                            // Paper.book().write("Main_url",mainUrl);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -130,6 +130,7 @@ public class fees extends AppCompatActivity {
 
     }
 
+
     private void fetchfeebalance() {
         final JsonObjectRequest jsonObjectRequest2= new JsonObjectRequest(Request.Method.GET, BALANCE_URL,
                 null, new Response.Listener<JSONObject>() {

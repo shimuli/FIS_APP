@@ -3,6 +3,7 @@
     package="com.fairmontsinternational.charlie.fairmontsinternational">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ForgetPassword"></activity>
-        <activity android:name=".Notifictions" />
+
+        <activity android:name=".NotificationActivity"
+            android:label="@string/notification"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2"
+            />
         <activity android:name=".FeeInvoice" />
         <activity android:name=".Diary" />
         <activity
