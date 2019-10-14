@@ -111,4 +111,15 @@ public class BaseUrl {
         return url;
     }
 
+    public static String fetchBankInfo(){
+        String url = ss+ "/api/BankInfo";
+        return url;
+    }
+
+    public static String fetchHealthDetails(String admission_no){
+        String url = ss+ "/api/StudentHealthProvider?Admno="+admission_no;
+        return url;
+    }
+
+
 }

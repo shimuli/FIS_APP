@@ -252,7 +252,11 @@ public class MainHomepage extends AppCompatActivity
             Paper.book().write("admission_no",empty);
             startActivity(new Intent(MainHomepage.this,children_profiles.class));
             finish();
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.bank_info){
+            startActivity(new Intent(MainHomepage.this, BankInfoActivity.class) );
+            return true;
+        }
+        else if (id == R.id.nav_send) {
             Intent intent=new Intent(MainHomepage.this,Feedback.class);
             intent.putExtra("parent_name",Pname.getText().toString());
             intent.putExtra("phoneNo",Phone.getText().toString());

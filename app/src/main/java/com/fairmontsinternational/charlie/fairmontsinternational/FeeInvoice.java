@@ -43,12 +43,11 @@ public class FeeInvoice extends AppCompatActivity {
     RecyclerView recyclerView;
     FeeInvoiceAdapter adapter;
     List<InvoiceFee> feesClassList;
-    TextView balance,total_invoiced, total_paid;
-    TextView StudentID;
+    TextView balance,total_invoiced, total_paid, StudentID;
     public static String INVOICETOTALS_URL;
     private static String FETCHINVOICE_URL;
     private static String UID_URL;
-    String student_id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,19 +64,8 @@ public class FeeInvoice extends AppCompatActivity {
         admission_no=Paper.book().read("admission_no").toString();
         INVOICETOTALS_URL= BaseUrl.fetchfeesinvoicetotals(admission_no);
         FETCHINVOICE_URL= BaseUrl.fetchfeeinvoice(admission_no);
+
         UID_URL = BaseUrl.fetchUID(admission_no);
-
-        try{
-            JSONObject obj = new JSONObject(UID_URL);
-            JSONObject Student = obj.getJSONObject("FeeInvoice");
-            student_id = Student.getString("StudentID");
-
-            StudentID.setText(student_id);
-        }catch(JSONException e){
-            e.printStackTrace();
-        }
-
-
 
         fetchfeebalance();
 
@@ -86,7 +74,7 @@ public class FeeInvoice extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         final ProgressDialog progressDialog=new ProgressDialog(this);
-        progressDialog.setMessage("Fetching fees records....");
+        progressDialog.setMessage("Fetching Fees Records....");
         progressDialog.show();
 
         StringRequest stringRequest=new StringRequest(Request.Method.GET, FETCHINVOICE_URL,
@@ -195,48 +183,7 @@ public class FeeInvoice extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest2);
     }
 
-   /* private void StudentUID(){
-        final JsonObjectRequest MyjsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                UID_URL, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray MyJsonArray = response.getJSONArray("FeeInvoice");
-                    student_id= MyJsonArray.get(0).toString();
 
-                    StudentID.setText(student_id);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String message = null;
-                if (error instanceof NetworkError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ServerError) {
-                    message = "The server could not be found. Please try again after some time!!";
-                } else if (error instanceof AuthFailureError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ParseError) {
-                    message = "Invalid Credentials! Please try again!!";
-                } else if (error instanceof NoConnectionError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof TimeoutError) {
-                    message = "Connection TimeOut! Please check your internet connection.";
-                }else{
-                    Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
-                }
-                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-            }
-        });
-        MyjsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-                5000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        RequestQueue requestQueue= Volley.newRequestQueue(this);
-        requestQueue.add(MyjsonObjectRequest);
-    } */
+
 
 }

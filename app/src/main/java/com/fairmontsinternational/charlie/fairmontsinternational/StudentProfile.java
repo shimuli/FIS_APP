@@ -40,7 +40,7 @@ public class StudentProfile extends AppCompatActivity {
 
     String providerName, providerPhone, contactPerson, homeLocation, homeAddress, homeDesc, itemDate, itemName, itemQuantity,
             docName, docDesc;
-    public static String FETCH_URL;
+    public static String FETCH_URL, HEALTH_URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +79,11 @@ public class StudentProfile extends AppCompatActivity {
         Paper.init(this);
         String admission_no=Paper.book().read("admission_no").toString();
 //        FETCH_URL="http://fairmontsinternationalschool.co.ke/fairmontsAPI/fetchsingleprofile.php?admission_no="+admission_no;
+        HEALTH_URL = BaseUrl.fetchHealthDetails(admission_no);
         FETCH_URL= BaseUrl.fetchsingleprofile(admission_no);
+
+
+        HealthDetails();
 
         //  Waiting for APIend point to complete the fetching of student SUID
 
@@ -90,6 +94,9 @@ public class StudentProfile extends AppCompatActivity {
         final ProgressDialog progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Fetching student profiles.");
         progressDialog.show();
+
+
+
 
         final JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(Request.Method.GET, FETCH_URL,
                 null, new Response.Listener<JSONObject>() {
@@ -144,9 +151,6 @@ public class StudentProfile extends AppCompatActivity {
                     level.setText(student_level);
                     gender.setText(student_gender);
                     dob.setText(student_dob);
-                    ProviderName.setText(providerName);
-                    ProviderPhone.setText(providerPhone);
-                    ContactPerson.setText(contactPerson);
                     HomeLocation.setText(homeLocation);
                     HomeAddress.setText(homeAddress);
                     HomeDesc.setText(homeDesc);
@@ -193,6 +197,60 @@ public class StudentProfile extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
 
         studentNumber.setText(admission_no);
+    }
+
+    private void HealthDetails(){
+        final JsonObjectRequest jsonObjectRequest1= new JsonObjectRequest(Request.Method.GET,HEALTH_URL ,
+                null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    JSONArray jsonArray= response.getJSONArray("Student");
+
+                    providerName = jsonArray.get(3).toString();
+                    providerPhone = jsonArray.get(5).toString();
+                    contactPerson = jsonArray.get(6).toString();
+
+                    ProviderName.setText(providerName);
+                    ProviderPhone.setText(providerPhone);
+                    ContactPerson.setText(contactPerson);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                String message = null;
+                if (error instanceof NetworkError) {
+                    message = "Cannot connect to Internet...Please check your connection!";
+                } else if (error instanceof ServerError) {
+                    message = "The server could not be found. Please try again after some time!!";
+                } else if (error instanceof AuthFailureError) {
+                    message = "Cannot connect to Internet...Please check your connection!";
+                } else if (error instanceof ParseError) {
+                    message = "Invalid Credentials! Please try again!!";
+                } else if (error instanceof NoConnectionError) {
+                    message = "Cannot connect to Internet...Please check your connection!";
+                } else if (error instanceof TimeoutError) {
+                    message = "Connection TimeOut! Please check your internet connection.";
+                }else{
+                    Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+                }
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+            }
+        });
+
+        jsonObjectRequest1.setRetryPolicy(new DefaultRetryPolicy(
+                5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue1= Volley.newRequestQueue(this);
+        requestQueue1.add(jsonObjectRequest1);
     }
 
 }

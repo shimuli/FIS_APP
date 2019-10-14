@@ -3,7 +3,7 @@
     package="com.fairmontsinternational.charlie.fairmontsinternational">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -12,13 +12,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ForgetPassword"></activity>
-
-        <activity android:name=".NotificationActivity"
+        <activity android:name=".ForgetPasswordCode"
+            android:label="Forgot Password"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/AppTheme2"/>
+        <activity
+            android:name=".BankInfoActivity"
+            android:label="Fee Payment Bank Information"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".ForgetPassword"
+            android:label="Change Password"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".NotificationActivity"
             android:label="@string/notification"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme2"
-            />
+            android:theme="@style/AppTheme2" />
         <activity android:name=".FeeInvoice" />
         <activity android:name=".Diary" />
         <activity
