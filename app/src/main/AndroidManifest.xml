@@ -12,11 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ForgetPasswordCode"
+        <activity android:name=".DiaryComment"
+            android:label="Extra-Curricula Diary Comments"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".Extra_Diary"
+            android:label="Extra-Curricula Diary"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".ForgetPasswordCode"
             android:label="Forgot Password"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AppTheme2"/>
+            android:theme="@style/AppTheme2"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".BankInfoActivity"
             android:label="Fee Payment Bank Information"

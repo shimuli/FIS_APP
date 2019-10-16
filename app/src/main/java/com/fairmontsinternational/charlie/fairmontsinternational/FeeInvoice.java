@@ -44,9 +44,11 @@ public class FeeInvoice extends AppCompatActivity {
     FeeInvoiceAdapter adapter;
     List<InvoiceFee> feesClassList;
     TextView balance,total_invoiced, total_paid, StudentID;
+    String SUID;
     public static String INVOICETOTALS_URL;
     private static String FETCHINVOICE_URL;
     private static String UID_URL;
+
 
 
     @Override
@@ -65,7 +67,9 @@ public class FeeInvoice extends AppCompatActivity {
         INVOICETOTALS_URL= BaseUrl.fetchfeesinvoicetotals(admission_no);
         FETCHINVOICE_URL= BaseUrl.fetchfeeinvoice(admission_no);
 
-        UID_URL = BaseUrl.fetchUID(admission_no);
+        UID_URL = BaseUrl.fetchHealthDetails(admission_no);
+
+        Suid();
 
         fetchfeebalance();
 
@@ -181,6 +185,43 @@ public class FeeInvoice extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest2);
+    }
+
+    private void Suid(){
+        final JsonObjectRequest jsonObjectRequest1= new JsonObjectRequest(Request.Method.GET,UID_URL,
+                null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    JSONArray jsonArray= response.getJSONArray("Student");
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+
+                    SUID =jsonObject.getString("StudentId");
+
+                    StudentID.setText(SUID);
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String message = null;
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+            }
+        });
+
+        jsonObjectRequest1.setRetryPolicy(new DefaultRetryPolicy(
+                5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue1= Volley.newRequestQueue(this);
+        requestQueue1.add(jsonObjectRequest1);
     }
 
 

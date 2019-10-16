@@ -43,7 +43,7 @@ public class MainHomepage extends AppCompatActivity
     public TextView Pname,Phone;
 
     boolean doubleBackToExitPressedOnce = false;
-    ConstraintLayout Profiler,Fee,Coursework,Timetables,Diary,attendance;
+    ConstraintLayout Profiler,Fee,Coursework,Timetables,Diary,attendance, BankDetails, ExtraDiary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class MainHomepage extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         View headerView=navigationView.getHeaderView(0);
@@ -78,6 +78,8 @@ public class MainHomepage extends AppCompatActivity
         Timetables= findViewById(R.id.Btn_Home_tab_StudentTimetable);
         Diary= findViewById(R.id.Btn_Home_tab_Studentdiary);
         attendance=findViewById(R.id.Btn_Home_tab_StudentAttendance);
+        BankDetails = findViewById(R.id.Btn_Bank_details);
+        ExtraDiary = findViewById(R.id.Btn_Co_Diary);
 
         attendance.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +122,21 @@ public class MainHomepage extends AppCompatActivity
             public void onClick(View v) {
                startActivity(new Intent(MainHomepage.this,FeeInvoice.class));
                 //startActivity(new Intent(MainHomepage.this,FeeInvoice.class));
+            }
+        });
+
+        BankDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainHomepage.this,BankInfoActivity.class ));
+
+            }
+        });
+
+        ExtraDiary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainHomepage.this,Extra_Diary.class ));
             }
         });
     }

@@ -121,5 +121,15 @@ public class BaseUrl {
         return url;
     }
 
+    public static String fetchDiary(String admission_no){
+        String url = ss+"/api/ExtraCurriculaDiary?id="+admission_no;
+        return url;
+    }
+
+    public static String searchDiary(String admission_no,String start_date,String end_date){
+        String url = ss +"/api/GetExtraCurriculaDiaryforPeriod?id="+admission_no+"&date_from="+start_date+"&date_to="+end_date;
+        return  url;
+    }
+
 
 }

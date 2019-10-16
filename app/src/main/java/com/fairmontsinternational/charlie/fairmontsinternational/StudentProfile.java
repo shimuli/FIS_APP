@@ -31,9 +31,10 @@ public class StudentProfile extends AppCompatActivity {
 
     TextView studentName,system_enrolled,level,fee,gender,studentNumber,dob,parent_name,other_parent_name,parent_id_no,other_parent_id_no,
             parent_phone,other_parent_phone,guardian_name,guardian_id_no,guardian_contact,home_address;
+
     String student_names, student_level,student_system,student_gender,student_dob,student_parent_name,student_other_parent_name,student_parent_id_no,
             student_other_parent_id_no,student_parent_phone,student_other_parent_phone,student_guardian_name,student_guardian_id_no,
-            student_guardian_contact,student_home_address;
+            student_guardian_contact,student_home_address, SUID;
 
     TextView ProviderName, ProviderPhone, ContactPerson, HomeLocation, HomeAddress, HomeDesc, ItemDate, ItemName, ItemQuantity,
             DocName, DocDesc,  student_UID;
@@ -83,6 +84,8 @@ public class StudentProfile extends AppCompatActivity {
         FETCH_URL= BaseUrl.fetchsingleprofile(admission_no);
 
 
+
+
         HealthDetails();
 
         //  Waiting for APIend point to complete the fetching of student SUID
@@ -98,7 +101,7 @@ public class StudentProfile extends AppCompatActivity {
 
 
 
-        final JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(Request.Method.GET, FETCH_URL,
+        final JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(Request.Method.GET,FETCH_URL,
                 null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -124,10 +127,7 @@ public class StudentProfile extends AppCompatActivity {
                     student_home_address=jsonArray.get(14).toString();
 
                     //  No End Points
-                    /* providerName = jsonArray.get(15).toString();
-                    providerPhone = jsonArray.get(16).toString();
-                    contactPerson = jsonArray.get(17).toString();
-                    homeLocation = jsonArray.get(18).toString();
+                    /*
                     homeAddress = jsonArray.get(19).toString();
                     homeDesc = jsonArray.get(20).toString();
                     itemDate = jsonArray.get(21).toString();
@@ -196,7 +196,8 @@ public class StudentProfile extends AppCompatActivity {
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
 
-        studentNumber.setText(admission_no);
+        studentNumber.setText("Adm Number: ");
+        studentNumber.append(admission_no);
     }
 
     private void HealthDetails(){
@@ -207,14 +208,18 @@ public class StudentProfile extends AppCompatActivity {
 
                 try {
                     JSONArray jsonArray= response.getJSONArray("Student");
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
 
-                    providerName = jsonArray.get(3).toString();
-                    providerPhone = jsonArray.get(5).toString();
-                    contactPerson = jsonArray.get(6).toString();
+                    providerName = jsonObject.getString("CompName");
+                    providerPhone = jsonObject.getString("CompContact");
+                    contactPerson = jsonObject.getString("Compcontactperson");
+                    SUID = "Student ID: "+jsonObject.getString("StudentId");
 
                     ProviderName.setText(providerName);
                     ProviderPhone.setText(providerPhone);
                     ContactPerson.setText(contactPerson);
+                    student_UID.setText(SUID);
+
 
 
                 } catch (JSONException e) {
@@ -224,23 +229,7 @@ public class StudentProfile extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
                 String message = null;
-                if (error instanceof NetworkError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ServerError) {
-                    message = "The server could not be found. Please try again after some time!!";
-                } else if (error instanceof AuthFailureError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ParseError) {
-                    message = "Invalid Credentials! Please try again!!";
-                } else if (error instanceof NoConnectionError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof TimeoutError) {
-                    message = "Connection TimeOut! Please check your internet connection.";
-                }else{
-                    Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
-                }
                 Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
             }
         });

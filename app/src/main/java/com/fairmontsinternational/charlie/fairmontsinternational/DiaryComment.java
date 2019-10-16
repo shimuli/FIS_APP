@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,12 +30,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URLEncoder;
-
 import io.paperdb.Paper;
 
-public class ParentComment extends AppCompatActivity {
-
+public class DiaryComment extends AppCompatActivity {
     Button save;
     TextView text_date,notes,teachers_coments,diary_id;
     EditText comments;
@@ -48,28 +43,28 @@ public class ParentComment extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_parent_comment);
+        setContentView(R.layout.activity_diary_comment);
 
-
-        save=findViewById(R.id.Comment_save);
-        text_date=findViewById(R.id.Comment_date_text);
-        notes=findViewById(R.id.Comment_notes_text);
-        teachers_coments=findViewById(R.id.Comment_teacher_text);
-        comments=findViewById(R.id.Comment_text);
-        diary_id=findViewById(R.id.diaryid);
+        save=findViewById(R.id.Comment_saveed);
+        text_date=findViewById(R.id.Comment_date_texted);
+        notes=findViewById(R.id.Comment_notes_texted);
+        teachers_coments=findViewById(R.id.Comment_teacher_texted);
+        comments=findViewById(R.id.Comment_texted);
+        diary_id=findViewById(R.id.diaryided);
 
         Intent intent=getIntent();
-        final String date=intent.getStringExtra("dates");
-        diaryId=intent.getStringExtra("diaryId");
-        String Diary_notes=intent.getStringExtra("notes");
-        String Tcomment=intent.getStringExtra("teacher_comment");
-        String Pcomment=intent.getStringExtra("parent_comment");
+        final String date=intent.getStringExtra("Date");
+        diaryId=intent.getStringExtra("DiaryId");
+        String Diary_Title=intent.getStringExtra("ExtraCurriculaName");
+        String Tcomment=intent.getStringExtra("TeacherComment");
+        String Pcomment=intent.getStringExtra("ParentComment");
+
+
 
         text_date.setText(date);
-        notes.setText(Diary_notes);
+        notes.setText(Diary_Title);
         teachers_coments.setText(Tcomment);
         comments.setText(Pcomment);
-
 
         Paper.init(this);
         admission_no=Paper.book().read("admission_no").toString();
@@ -82,21 +77,19 @@ public class ParentComment extends AppCompatActivity {
                 if(Comment.isEmpty()){
                     Snackbar.make(v,"Write a comment first!!",Snackbar.LENGTH_LONG).show();
                 }else{
-//                    FETCH_URL="http://fairmontsinternationalschool.co.ke/fairmontsAPI/addcomment.php?admission_no="+admission_no
-//                            +"&date="+dated+"&comment="+Comment;
-                   // FETCH_URL= BaseUrl.addcomment(admission_no,dated,Comment);
-                    FETCH_URL= BaseUrl.addcomment(diaryId,dated,Comment);
-                    FETCH_URL= FETCH_URL.replaceAll(" " ,"%20");
-                  //  Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
+//
+                    //FETCH_URL= BaseUrl.addDiaryComment(diaryId,dated,Comment);
+                    // FETCH_URL= FETCH_URL.replaceAll(" " ,"%20");
+
                     execute();
-                    }
+                }
             }
         });
     }
 
     private void execute() {
 
-        final ProgressDialog progressDialog=new ProgressDialog(ParentComment.this);
+        final ProgressDialog progressDialog=new ProgressDialog(DiaryComment.this);
         progressDialog.setMessage("Saving...");
         progressDialog.show();
 
@@ -104,7 +97,7 @@ public class ParentComment extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                      //  progressDialog.dismiss();
+
 
                         try {
                             JSONArray jsonArray=response.getJSONArray("Comment");
@@ -113,7 +106,7 @@ public class ParentComment extends AppCompatActivity {
                             switch (Status){
                                 case"Updated":
                                     Toast.makeText(getApplicationContext(),"Comment Saved!",Toast.LENGTH_LONG).show();
-                                    startActivity(new Intent(ParentComment.this,Reports.class));
+                                    startActivity(new Intent(DiaryComment.this,Extra_Diary.class));
                                     finish();
                                     break;
                                 case"Failed":
@@ -160,7 +153,6 @@ public class ParentComment extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-
     private void postcomment() {
         final JsonObjectRequest jsonObjectRequest2= new JsonObjectRequest(Request.Method.GET, FETCH_URL,
                 null, new Response.Listener<JSONObject>() {
@@ -172,7 +164,7 @@ public class ParentComment extends AppCompatActivity {
                     switch (Status){
                         case"Updated":
                             Toast.makeText(getApplicationContext(),"Comment Saved!",Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(ParentComment.this,Reports.class));
+                            startActivity(new Intent(DiaryComment.this,Extra_Diary.class));
                             finish();
                             break;
                         case"Failed":
@@ -212,10 +204,12 @@ public class ParentComment extends AppCompatActivity {
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest2);
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(ParentComment.this,Reports.class));
+        startActivity(new Intent(DiaryComment.this,Extra_Diary.class));
         finish();
     }
+
 }

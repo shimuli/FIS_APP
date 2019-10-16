@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DiaryComment"
+    android:background="@color/colorWhite">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/diaryided"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0000-00-00"
+                android:textColor="@color/colorPrimarys"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/nunito_extralight"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/materialine"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+            <TextView
+                android:id="@+id/Comment_date_texted"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0000-00-00"
+                android:textColor="@color/colorPrimarys"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/nunito_extralight"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/materialine"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:id="@+id/Comment_notes_labeled"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimarys"
+                android:fontFamily="@font/nunito_extralight"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/Comment_date_texted"
+                android:text="Diary Title"
+                />
+
+            <TextView
+                android:id="@+id/Comment_notes_texted"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/nunito_extralight"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@+id/Comment_notes_labeled"
+                android:text="Notes"
+                android:background="@drawable/materialine"/>
+
+
+
+            <TextView
+                android:id="@+id/Comment_teacher_labeled"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimarys"
+                android:fontFamily="@font/nunito_extralight"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/Comment_notes_texted"
+                android:text="Teacher's Comments"/>
+
+            <TextView
+                android:id="@+id/Comment_teacher_texted"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/nunito_extralight"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@+id/Comment_teacher_labeled"
+                android:text="Comments"
+                android:background="@drawable/materialine"/>
+
+            <TextView
+                android:id="@+id/Comment_parents_labeled"
+                android:paddingTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimarys"
+                android:fontFamily="@font/nunito_extralight"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Parent's Comments"
+                />
+
+            <EditText
+                android:layout_marginTop="10dp"
+                android:id="@+id/Comment_texted"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:gravity="top"
+                android:hint="Enter Comments"
+                android:padding="10dp"
+                android:textSize="15sp"
+                app:fontFamily="@font/nunito_extralight"
+                android:background="@drawable/formtextwhite"/>
+
+            <Button
+                android:id="@+id/Comment_saveed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/buttonborder"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Save Comment"
+                android:textAllCaps="false"
+                android:textColor="@color/backgroundcolor"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/nunito_extralight"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

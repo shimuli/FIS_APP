@@ -19,6 +19,7 @@ public class BankAdapter extends RecyclerView.Adapter<BankAdapter.BankViewHolder
 
     public BankAdapter(Context context, List<BankInfoClass>BankList){
         this.context = context;
+
         this.BankList = BankList;
     }
     @NonNull
