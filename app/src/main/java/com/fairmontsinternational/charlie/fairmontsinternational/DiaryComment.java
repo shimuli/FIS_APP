@@ -78,8 +78,8 @@ public class DiaryComment extends AppCompatActivity {
                     Snackbar.make(v,"Write a comment first!!",Snackbar.LENGTH_LONG).show();
                 }else{
 //
-                    //FETCH_URL= BaseUrl.addDiaryComment(diaryId,dated,Comment);
-                    // FETCH_URL= FETCH_URL.replaceAll(" " ,"%20");
+                    FETCH_URL= BaseUrl. addExtraComment(diaryId,dated,Comment);
+                    FETCH_URL= FETCH_URL.replaceAll(" " ,"%20");
 
                     execute();
                 }
