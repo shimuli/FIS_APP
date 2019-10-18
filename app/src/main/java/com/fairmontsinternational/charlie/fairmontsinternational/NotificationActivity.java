@@ -68,61 +68,70 @@ public class NotificationActivity extends AppCompatActivity {
         progressDialog.setMessage("Fetching Notifications...");
         progressDialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, FETCH_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        progressDialog.dismiss();
+        if (FETCH_URL ==null){
+            Toast.makeText(getApplicationContext(), "No....", Toast.LENGTH_SHORT).show();
+        }
 
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            JSONArray jsonArray = jsonObject.getJSONArray("Notification");
+        else {
 
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject object = jsonArray.getJSONObject(i);
-                                notificationClasses.add(new NotificationClass
-                                        (object.getString("NotificationFrom"), object.getString("Title"),
-                                         object.getString("Message")));
+
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, FETCH_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            progressDialog.dismiss();
+
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                JSONArray jsonArray = jsonObject.getJSONArray("Notification");
+
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject object = jsonArray.getJSONObject(i);
+                                    notificationClasses.add(new NotificationClass
+                                            (object.getString("NotificationFrom"), object.getString("Title"),
+                                                    object.getString("Message")));
+                                }
+
+                                adapter = new NotificationAdapter(NotificationActivity.this, notificationClasses);
+                                recyclerView.setAdapter(adapter);
+                            } catch (JSONException e) {
+                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                                e.printStackTrace();
                             }
-
-                            adapter = new NotificationAdapter(NotificationActivity.this, notificationClasses);
-                            recyclerView.setAdapter(adapter);
-                        } catch (JSONException e) {
-                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                            e.printStackTrace();
                         }
+
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    progressDialog.dismiss();
+
+                    String message = null;
+                    if (error instanceof NetworkError) {
+                        message = "Cannot connect to Internet...Please check your connection!";
+                    } else if (error instanceof ServerError) {
+                        message = "The server could not be found. Please try again after some time!!";
+                    } else if (error instanceof AuthFailureError) {
+                        message = "Cannot connect to Internet...Please check your connection!";
+                    } else if (error instanceof ParseError) {
+                        message = "Parsing error! Please try again after some time!!";
+                    } else if (error instanceof NoConnectionError) {
+                        message = "Cannot connect to Internet...Please check your connection!";
+                    } else if (error instanceof TimeoutError) {
+                        message = "Connection TimeOut! Please check your internet connection.";
+                    } else {
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
                     }
 
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-
-                String message = null;
-                if (error instanceof NetworkError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ServerError) {
-                    message = "The server could not be found. Please try again after some time!!";
-                } else if (error instanceof AuthFailureError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ParseError) {
-                    message = "Parsing error! Please try again after some time!!";
-                } else if (error instanceof NoConnectionError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof TimeoutError) {
-                    message = "Connection TimeOut! Please check your internet connection.";
-                } else {
-                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                 }
+            });
 
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-            }
-        });
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 
     }
+        }
 
 
     }

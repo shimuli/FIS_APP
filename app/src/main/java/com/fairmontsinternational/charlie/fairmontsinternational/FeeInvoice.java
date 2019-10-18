@@ -93,10 +93,10 @@ public class FeeInvoice extends AppCompatActivity {
 
                             for(int i=0 ; i<jsonArray.length();i++){
                                 JSONObject object=jsonArray.getJSONObject(i);
-                                feesClassList.add(new InvoiceFee("PackageName: "+object.getString("PackageName"),"Payments Ksh:"+object.getString("Payments")
-                                        ,"Paid Ksh: "+object.getString("Payments")
-                                        ,"Balance Ksh: "+object.getString("Balance")+" "+object.getString("BalanceBf")
-                                           ,"Balance Ksh:" +object.getString("Balance")));
+                                feesClassList.add(new InvoiceFee("ITEM:  "+object.getString("PackageName"),"Payments Ksh:  "+object.getString("Payments")
+                                        ,"Paid Ksh:  "+object.getString("Payments")
+                                        ,"Balance Ksh:  "+object.getString("Balance")+" "+object.getString("BalanceBf")
+                                           ,"Balance Ksh:  " +object.getString("Balance")));
                             }
 
                             adapter=new  FeeInvoiceAdapter(FeeInvoice.this,feesClassList);
