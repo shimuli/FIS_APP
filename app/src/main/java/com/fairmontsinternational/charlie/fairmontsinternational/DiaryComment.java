@@ -34,7 +34,7 @@ import io.paperdb.Paper;
 
 public class DiaryComment extends AppCompatActivity {
     Button save;
-    TextView text_date,notes,teachers_coments,diary_id;
+    TextView text_date,notes,teachers_coments;
     EditText comments;
     String admission_no;
     String diaryId;
@@ -50,14 +50,14 @@ public class DiaryComment extends AppCompatActivity {
         notes=findViewById(R.id.Comment_notes_texted);
         teachers_coments=findViewById(R.id.Comment_teacher_texted);
         comments=findViewById(R.id.Comment_texted);
-        diary_id=findViewById(R.id.diaryided);
+
 
         Intent intent=getIntent();
-        final String date=intent.getStringExtra("Date");
-        diaryId=intent.getStringExtra("DiaryId");
-        String Diary_Title=intent.getStringExtra("ExtraCurriculaName");
-        String Tcomment=intent.getStringExtra("TeacherComment");
-        String Pcomment=intent.getStringExtra("ParentComment");
+        final String date=intent.getStringExtra("date");
+        diaryId=intent.getStringExtra("diaryId");
+        String Diary_Title=intent.getStringExtra("Title");
+        String Tcomment=intent.getStringExtra("Teacher Comment");
+        String Pcomment=intent.getStringExtra("Parent Comment");
 
 
 
@@ -153,57 +153,7 @@ public class DiaryComment extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-    private void postcomment() {
-        final JsonObjectRequest jsonObjectRequest2= new JsonObjectRequest(Request.Method.GET, FETCH_URL,
-                null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray jsonArray=response.getJSONArray("Comment");
-                    String Status=jsonArray.get(0).toString();
-                    switch (Status){
-                        case"Updated":
-                            Toast.makeText(getApplicationContext(),"Comment Saved!",Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(DiaryComment.this,Extra_Diary.class));
-                            finish();
-                            break;
-                        case"Failed":
-                            Toast.makeText(getApplicationContext(),"Comment not saved!.",Toast.LENGTH_LONG).show();
-                            break;
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String message = null;
-                if (error instanceof NetworkError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ServerError) {
-                    message = "The server could not be found. Please try again after some time!!";
-                } else if (error instanceof AuthFailureError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ParseError) {
-                    message = "Invalid Credentials! Please try again!!";
-                } else if (error instanceof NoConnectionError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof TimeoutError) {
-                    message = "Connection TimeOut! Please check your internet connection.";
-                }else{
-                    Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
-                }
-                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-            }
-        });
-        jsonObjectRequest2.setRetryPolicy(new DefaultRetryPolicy(
-                35000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        RequestQueue requestQueue= Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjectRequest2);
-    }
+
 
     @Override
     public void onBackPressed() {

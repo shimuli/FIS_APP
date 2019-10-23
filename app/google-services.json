@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "457051626773",
-    "firebase_url": "https://myfairmont-26664.firebaseio.com",
-    "project_id": "myfairmont-26664",
-    "storage_bucket": "myfairmont-26664.appspot.com"
+    "project_number": "535862731643",
+    "firebase_url": "https://fisapp-ba91e.firebaseio.com",
+    "project_id": "fisapp-ba91e",
+    "storage_bucket": "fisapp-ba91e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:457051626773:android:1f64dfb8093b388eb3dd1c",
+        "mobilesdk_app_id": "1:535862731643:android:ddeea974d96db807bf13de",
         "android_client_info": {
           "package_name": "com.fairmontsinternational.charlie.fairmontsinternational"
         }
       },
       "oauth_client": [
         {
-          "client_id": "457051626773-roj76akdlkkom7t8hlj3d9iv4k1tp7uc.apps.googleusercontent.com",
+          "client_id": "535862731643-1n8ibun61vkd41ficf75k6h9bnchal2b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fairmontsinternational.charlie.fairmontsinternational",
+            "certificate_hash": "a686e0942c84c3052c8413b5aaf87648ec3f7ec7"
+          }
+        },
+        {
+          "client_id": "535862731643-j5qtabjv76djfujqvlhmja12f1i32co9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCjqHAiiK8bS6-KvOIXsSY5yDUlF_ahpWQ"
+          "current_key": "AIzaSyBEpZJ2Z8GSadc3DbrYOTAvKN7l8Nliq-Q"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "457051626773-roj76akdlkkom7t8hlj3d9iv4k1tp7uc.apps.googleusercontent.com",
+              "client_id": "535862731643-j5qtabjv76djfujqvlhmja12f1i32co9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

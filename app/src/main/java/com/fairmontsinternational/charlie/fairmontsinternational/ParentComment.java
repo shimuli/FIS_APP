@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.fairmontsinternational.charlie.fairmontsinternational.Classes.BaseUrl;
 
@@ -32,17 +34,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.paperdb.Paper;
 
 public class ParentComment extends AppCompatActivity {
 
     Button save;
-    TextView text_date,notes,teachers_coments,diary_id;
+    TextView text_date,notes,teachers_coments;
     EditText comments;
     String admission_no;
     String diaryId;
+    private RequestQueue requestQueue;
     private static String FETCH_URL;
 
     @Override
@@ -56,14 +62,15 @@ public class ParentComment extends AppCompatActivity {
         notes=findViewById(R.id.Comment_notes_text);
         teachers_coments=findViewById(R.id.Comment_teacher_text);
         comments=findViewById(R.id.Comment_text);
-        diary_id=findViewById(R.id.diaryid);
+
 
         Intent intent=getIntent();
-        final String date=intent.getStringExtra("dates");
+        final String date=intent.getStringExtra("date");
         diaryId=intent.getStringExtra("diaryId");
         String Diary_notes=intent.getStringExtra("notes");
         String Tcomment=intent.getStringExtra("teacher_comment");
         String Pcomment=intent.getStringExtra("parent_comment");
+
 
         text_date.setText(date);
         notes.setText(Diary_notes);
@@ -88,6 +95,9 @@ public class ParentComment extends AppCompatActivity {
                     FETCH_URL= BaseUrl.addcomment(diaryId,dated,Comment);
                     FETCH_URL= FETCH_URL.replaceAll(" " ,"%20");
                   //  Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
+
+                    //String data ="{" + "\"comment\"" + "\"" + comments.getText().toString() + "\","+
+                    //       "}";
                     execute();
                     }
             }
@@ -160,58 +170,6 @@ public class ParentComment extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-
-    private void postcomment() {
-        final JsonObjectRequest jsonObjectRequest2= new JsonObjectRequest(Request.Method.GET, FETCH_URL,
-                null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray jsonArray=response.getJSONArray("Comment");
-                    String Status=jsonArray.get(0).toString();
-                    switch (Status){
-                        case"Updated":
-                            Toast.makeText(getApplicationContext(),"Comment Saved!",Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(ParentComment.this,Reports.class));
-                            finish();
-                            break;
-                        case"Failed":
-                            Toast.makeText(getApplicationContext(),"Comment not saved!.",Toast.LENGTH_LONG).show();
-                            break;
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String message = null;
-                if (error instanceof NetworkError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ServerError) {
-                    message = "The server could not be found. Please try again after some time!!";
-                } else if (error instanceof AuthFailureError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ParseError) {
-                    message = "Invalid Credentials! Please try again!!";
-                } else if (error instanceof NoConnectionError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof TimeoutError) {
-                    message = "Connection TimeOut! Please check your internet connection.";
-                }else{
-                    Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
-                }
-                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-            }
-        });
-        jsonObjectRequest2.setRetryPolicy(new DefaultRetryPolicy(
-                35000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        RequestQueue requestQueue= Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjectRequest2);
-    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();

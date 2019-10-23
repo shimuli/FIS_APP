@@ -133,7 +133,7 @@ public class BaseUrl {
 
     public static String addExtraComment(String diaryid,String date,String comment)
     {
-        String url = ss+"/api/ExtraCurriculaDiaryParentComment?diary_id"+diaryid+"&date="+date+"&comment="+comment;
+        String url = ss+"/api/ExtraCurriculaDiaryParentComment?diary_id="+diaryid+"&date="+date+"&comment="+comment;
         return url;
     }
 

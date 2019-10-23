@@ -4,11 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BankInfoActivity">
+    android:orientation="vertical"
+    android:weightSum="10"
+    >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/bank_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_weight="8.5"
+        android:layout_height="350dp"
+        tools:context=".BankInfoActivity"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_weight="1.5"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="20dp"
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/backgroundcolor"
+            android:text="Lipa Na Mpesa"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>

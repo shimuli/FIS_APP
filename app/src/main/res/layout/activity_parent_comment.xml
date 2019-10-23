@@ -17,21 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/diaryid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="0000-00-00"
-                android:textColor="@color/colorPrimarys"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:fontFamily="@font/nunito_extralight"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:background="@drawable/materialine"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"/>
+
             <TextView
                 android:id="@+id/Comment_date_text"
                 android:layout_width="match_parent"

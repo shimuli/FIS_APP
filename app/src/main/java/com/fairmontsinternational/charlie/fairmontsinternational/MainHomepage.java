@@ -2,11 +2,14 @@ package com.fairmontsinternational.charlie.fairmontsinternational;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -32,6 +35,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.fairmontsinternational.charlie.fairmontsinternational.Classes.BaseUrl;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import io.paperdb.Paper;
 
@@ -41,6 +49,7 @@ public class MainHomepage extends AppCompatActivity
     String admission_no,parent_phone;
     private static String URL;
     public TextView Pname,Phone;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     boolean doubleBackToExitPressedOnce = false;
     ConstraintLayout Profiler,Fee,Coursework,Timetables,Diary,attendance, BankDetails, ExtraDiary;
@@ -51,6 +60,8 @@ public class MainHomepage extends AppCompatActivity
         setContentView(R.layout.activity_main_homepage);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         DrawerLayout drawer =findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -80,6 +91,22 @@ public class MainHomepage extends AppCompatActivity
         attendance=findViewById(R.id.Btn_Home_tab_StudentAttendance);
         BankDetails = findViewById(R.id.Btn_Bank_details);
         ExtraDiary = findViewById(R.id.Btn_Co_Diary);
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+
+                    }
+                });
 
         attendance.setOnClickListener(new View.OnClickListener() {
             @Override

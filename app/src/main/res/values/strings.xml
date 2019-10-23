@@ -34,4 +34,5 @@
     <string name="guardian_s_contact">Guardian\'s Contact</string>
     <string name="guardian_s_id_no">Guardian\'s ID no</string>
     <string name="title_activity_main_homepage">MainHomepage</string>
+    <string name="msg_token_fmt">Token Generated</string>
 </resources>

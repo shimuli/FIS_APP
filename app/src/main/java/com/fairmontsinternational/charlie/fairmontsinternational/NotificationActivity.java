@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,12 +40,15 @@ import java.util.Date;
 import java.util.List;
 
 import io.paperdb.Paper;
+import pl.droidsonroids.gif.GifImageView;
 
 
 public class NotificationActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     NotificationAdapter adapter;
     List<NotificationClass> notificationClasses;
+    TextView noNotifications;
+    GifImageView ImageView;
 
 
     private static String FETCH_URL;
@@ -53,7 +58,6 @@ public class NotificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifictions);
 
-
         Paper.init(this);
 
         String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -61,18 +65,17 @@ public class NotificationActivity extends AppCompatActivity {
 
         notificationClasses = new ArrayList<>();
         recyclerView = findViewById(R.id.note_view);
+        noNotifications = findViewById(R.id.empty_view);
+        ImageView = findViewById(R.id.gif_View);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Fetching Notifications...");
         progressDialog.show();
-
-        if (FETCH_URL ==null){
-            Toast.makeText(getApplicationContext(), "No....", Toast.LENGTH_SHORT).show();
-        }
-
-        else {
 
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, FETCH_URL,
@@ -85,6 +88,8 @@ public class NotificationActivity extends AppCompatActivity {
                                 JSONObject jsonObject = new JSONObject(response);
                                 JSONArray jsonArray = jsonObject.getJSONArray("Notification");
 
+
+
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);
                                     notificationClasses.add(new NotificationClass
@@ -94,6 +99,19 @@ public class NotificationActivity extends AppCompatActivity {
 
                                 adapter = new NotificationAdapter(NotificationActivity.this, notificationClasses);
                                 recyclerView.setAdapter(adapter);
+
+                                    if (notificationClasses.isEmpty()){
+                                        recyclerView.setVisibility(View.GONE);
+                                        noNotifications.setVisibility(View.VISIBLE);
+                                        ImageView.setVisibility(View.VISIBLE);
+                                    }
+                                    else {
+                                        noNotifications.setVisibility(View.GONE);
+                                        ImageView.setVisibility(View.GONE);
+                                        recyclerView.setVisibility(View.VISIBLE);
+
+
+                            }
                             } catch (JSONException e) {
                                 Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                                 e.printStackTrace();
@@ -104,6 +122,7 @@ public class NotificationActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     progressDialog.dismiss();
+                    noNotifications.setVisibility(View.VISIBLE);
 
                     String message = null;
                     if (error instanceof NetworkError) {
@@ -118,7 +137,8 @@ public class NotificationActivity extends AppCompatActivity {
                         message = "Cannot connect to Internet...Please check your connection!";
                     } else if (error instanceof TimeoutError) {
                         message = "Connection TimeOut! Please check your internet connection.";
-                    } else {
+                    }
+                    else {
                         Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
                     }
 
@@ -131,7 +151,10 @@ public class NotificationActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
-        }
+
+
+
+
 
 
     }

@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import pl.droidsonroids.gif.GifImageView;
 
 public class Extra_Diary extends AppCompatActivity {
     RecyclerView recyclerView, recyclerView2;
@@ -54,6 +55,8 @@ public class Extra_Diary extends AppCompatActivity {
     LinearLayout searchlayout;
     TextView previous_reports,close,from_date,to_date,no_reports;
     Button from_button,to_button,filter;
+    TextView noNotifications;
+    GifImageView ImageView;
     String admission_no;
     Calendar cal;
     DatePickerDialog datedialog;
@@ -81,6 +84,8 @@ public class Extra_Diary extends AppCompatActivity {
         no_reports=findViewById(R.id.Diary_no_reports);
         recyclerView=findViewById(R.id.Diary_Recyclerview);
         filter=findViewById(R.id.Diary_filter_dates);
+        noNotifications = findViewById(R.id.empty_view);
+        ImageView = findViewById(R.id.gif_View);
 
         extraDiaryClasses = new ArrayList<>();
         extraDiaryClasses1 =new ArrayList<>();
@@ -191,6 +196,18 @@ public class Extra_Diary extends AppCompatActivity {
                             extraDiaryAdapter = new ExtraDiaryAdapter(Extra_Diary.this, extraDiaryClasses);
                             recyclerView.setAdapter(extraDiaryAdapter);
 
+                            if (extraDiaryClasses.isEmpty()){
+                                recyclerView.setVisibility(View.GONE);
+                                noNotifications.setVisibility(View.VISIBLE);
+                                ImageView.setVisibility(View.VISIBLE);
+                            }
+                            else {
+                                noNotifications.setVisibility(View.GONE);
+                                ImageView.setVisibility(View.GONE);
+                                recyclerView.setVisibility(View.VISIBLE);
+
+                            }
+
 
                         } catch (JSONException j) {
                             Toast.makeText(getApplicationContext(), j.getMessage(), Toast.LENGTH_SHORT).show();
@@ -271,6 +288,21 @@ public class Extra_Diary extends AppCompatActivity {
 
                             extraDiaryAdapter1=new  ExtraDiaryAdapter(Extra_Diary.this,extraDiaryClasses1);
                             recyclerView2.setAdapter( extraDiaryAdapter1);
+
+                            if (extraDiaryClasses1.isEmpty()){
+                                recyclerView.setVisibility(View.GONE);
+                                noNotifications.setVisibility(View.VISIBLE);
+                                ImageView.setVisibility(View.VISIBLE);
+                            }
+                            else {
+                                noNotifications.setVisibility(View.GONE);
+                                ImageView.setVisibility(View.GONE);
+                                recyclerView.setVisibility(View.VISIBLE);
+
+                            }
+
+
+
 
                         } catch (JSONException e) {
                             extraDiaryClasses1.clear();
